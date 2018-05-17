@@ -1,2 +1,3 @@
 # python-oo
-Python OO - studies
+
+Coding exercises to study object oriented python
