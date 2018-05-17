@@ -16,30 +16,20 @@ p2 = Person2()
 # print(p2.full_name)
 
 class Point:
-    def __init__(self, x, y):
-        self.x = x
-        self.y = y
+    def __init__(self, x = 0, y = 0):
+        self.x, self.y = x, y
 
     def reset(self):
-        self.x = 0
-        self.y = 0
+        self.x, self.y = 0, 0
 
     def plot(self):
         print('{}, {}'.format(self.x, self.y))
 
-    # def go_error():
-    #     pass
+    def move(self, x, y):
+        self.x, self.y = x, y
 
 
-p = Point(10, 20)
+p = Point()
 p.plot()
-p.reset()
+p.move(10, 20)
 p.plot()
-
-a = Point(50, 40)
-Point.plot(a)
-Point.reset(a)
-Point.plot(a)
-
-# Throw error because of missing "self" argument
-# a.go_error()
