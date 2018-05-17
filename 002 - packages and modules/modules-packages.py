@@ -1,4 +1,4 @@
-from square import Square as Sq
+from polygons.square import Square as Sq
 
 s = Sq(5)
 
