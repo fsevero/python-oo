@@ -1,6 +1,6 @@
-from square import Square
+from square import Square as Sq
 
-s = Square(5)
+s = Sq(5)
 
 print(s.perimeter())
 print(s.area())
