@@ -1,5 +1,6 @@
 class Clock:
-    def __init__(self, h=0, m=0, s=0):
+    def __init__(self, h=0, m=0, s=0, *args, **kwargs):
+        super(Clock, self).__init__(*args, **kwargs)
         self.h, self.m, self.s = h, m, s
 
     def __str__(self):
@@ -31,7 +32,8 @@ class Clock:
 # print(clock)
 
 class Calendar:
-    def __init__(self, day=1, month=1, year=2018):
+    def __init__(self, day=1, month=1, year=2018, *args, **kwargs):
+        super(Calendar, self).__init__(*args, **kwargs)
         self.day, self.month, self.year = day, month, year
 
     def adjust(self, day, month, year):
@@ -62,10 +64,10 @@ class Calendar:
 
 class ClockAndCalendar(Clock, Calendar):
     def __init__(self, h, m, s, day, month, year):
-        Clock.__init__(self, h, m, s)
-        Calendar.__init__(self, day, month, year)
+        super(ClockAndCalendar, self).__init__(h=h, m=m, s=s, day=day, month=month, year=year)
 
     def __str__(self):
+        # return super(ClockAndCalendar, self).__str__()
         return Clock.__str__(self) + ', ' + Calendar.__str__(self)
 
     def tick(self):
