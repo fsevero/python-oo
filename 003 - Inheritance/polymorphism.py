@@ -26,7 +26,17 @@ class Square(GeoForm):
         print('Square perimeter = {}'.format(perimeter))
         return perimeter
 
+class Circle(GeoForm):
+    pass
+
+print('-- SQUARE --')
 s = Square(10)
 s.area()
 s.perimeter()
 s.description()
+
+print('-- CIRCLE --')
+c = Circle()
+c.area()
+c.perimeter()
+c.description()
