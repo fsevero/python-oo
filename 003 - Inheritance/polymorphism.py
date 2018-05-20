@@ -12,9 +12,21 @@ class GeoForm:
         print('Form description')
 
 class Square(GeoForm):
-    pass
+    def __init__(self, a):
+        print('Square Constructor')
+        self.a = a
 
-s = Square()
+    def area(self):
+        area = self.a ** 2
+        print('Square area = {}'.format(area))
+        return area
+
+    def perimeter(self):
+        perimeter = self.a * 4
+        print('Square perimeter = {}'.format(perimeter))
+        return perimeter
+
+s = Square(10)
 s.area()
 s.perimeter()
 s.description()
