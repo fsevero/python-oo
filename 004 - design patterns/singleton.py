@@ -40,3 +40,18 @@ LazySingleton.get_instance()
 s2 = LazySingleton()
 
 assert s1.get_instance() is s2.get_instance()
+
+class MonostateSingleton(object):
+    __shared_state = {'1': 2}
+
+    def __init__(self):
+        self.__dict__ = self.__shared_state
+
+a1 = MonostateSingleton()
+a2 = MonostateSingleton()
+
+a1.x = 5
+
+assert not a1 is a2
+assert a1.x == a2.x
+assert a1.__dict__ == a2.__dict__
