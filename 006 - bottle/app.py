@@ -31,4 +31,4 @@ def check_login(username, password):
     return (username in users.keys() and users[username] == password)
 
 if __name__ == '__main__':
-    run(host='localhost', port=8080, debug=True)
+    run(host='localhost', port=8080, debug=True, reloader=True)
