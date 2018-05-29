@@ -51,13 +51,26 @@ class Database:
         try:
             cursor = self.connection.cursor()
             cursor.execute("""
-            SELECT * FROM clients WHERE document = {}
-            """.format(document))
+            SELECT * FROM clients WHERE document=?
+            """,[(document)])
 
             client = cursor.fetchone()
             if client is not None:
                 print('Client {} found in the database'.format(client[1]))
             else:
                 print('Document {} is not present in the database'.format(document))
+        except AttributeError:
+            print('There are no database connection present')
+
+    def search_email(self, email):
+        """Searches all clients by email"""
+        try:
+            cursor = self.connection.cursor()
+            cursor.execute("""
+            SELECT * FROM clients WHERE email=?
+            """,[email])
+
+            for client in cursor.fetchall():
+                print('Client {} found in the database'.format(client[1]))
         except AttributeError:
             print('There are no database connection present')
