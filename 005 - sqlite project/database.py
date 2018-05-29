@@ -32,3 +32,16 @@ class Database:
             """)
         except AttributeError:
             print('There are no database connection present')
+
+    def insert_client(self, name, document, email):
+        """Insert a new client in the database"""
+        try:
+            cursor = self.connection.cursor()
+            cursor.execute("""
+            INSERT INTO clients (name, document, email) VALUES (?, ?, ?)
+            """, (name, document, email))
+            self.connection.commit()
+        except AttributeError:
+            print('There are no database connection present')
+        except sqlite3.IntegrityError:
+            print('Document {} already exists. Cannot duplicate'.format(document))
