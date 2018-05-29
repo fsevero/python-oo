@@ -1,4 +1,4 @@
-from bottle import route, run, request
+from bottle import route, run, request, template
 
 @route('/')
 def index():
@@ -12,27 +12,23 @@ def hello(name='Anonymous'):
 
 @route('/login', method='GET')
 def login():
-    return '''
-    <form action="/login" method="post">
-        username: <input name="username" type="text" />
-        password: <input name="password" type="password" />
-        <input value="Login" type="submit" />
-    </form>
-    '''
+    return template('login')
 
 @route('/login', method='POST')
 def do_login():
     username = request.forms.get('username')
     password = request.forms.get('password')
 
-    if check_login(username, password):
-        return '<h1>Logged as user {}</h1>'.format(username)
-    else:
-        return '<h1>Not allowed</h1>'
+    return template('logged', logged=check_login(username, password), username=username)
 
 
 def check_login(username, password):
-    return False
+    users = {
+        'abc': '1234',
+        'xyz': '5678',
+        '123': 'abcd'
+    }
+    return (username in users.keys() and users[username] == password)
 
 if __name__ == '__main__':
     run(host='localhost', port=8080, debug=True)
