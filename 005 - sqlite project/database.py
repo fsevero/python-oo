@@ -45,3 +45,19 @@ class Database:
             print('There are no database connection present')
         except sqlite3.IntegrityError:
             print('Document {} already exists. Cannot duplicate'.format(document))
+
+    def search_client(self, document):
+        """Searches a client by the document number"""
+        try:
+            cursor = self.connection.cursor()
+            cursor.execute("""
+            SELECT * FROM clients WHERE document = {}
+            """.format(document))
+
+            client = cursor.fetchone()
+            if client is not None:
+                print('Client {} found in the database'.format(client[1]))
+            else:
+                print('Document {} is not present in the database'.format(document))
+        except AttributeError:
+            print('There are no database connection present')
