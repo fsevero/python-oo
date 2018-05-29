@@ -17,3 +17,18 @@ class Database:
             self.connection.close()
         except AttributeError:
             pass
+
+    def make_schema(self):
+        """Created database tables"""
+        try:
+            cursor = self.connection.cursor()
+            cursor.execute("""
+            CREATE TABLE IF NOT EXISTS clients (
+                id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+                name TEXT NOT NULL,
+                document TEXT UNIQUE NOT NULL,
+                email TEXT NOT NULL
+            );
+            """)
+        except AttributeError:
+            print('There are no database connection present')
