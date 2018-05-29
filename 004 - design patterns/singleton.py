@@ -18,6 +18,7 @@ s2 = Singleton()
 assert s1 == s2
 assert s1 is s2
 
+
 class LazySingleton(object):
     __instance = None
 
@@ -41,6 +42,7 @@ s2 = LazySingleton()
 
 assert s1.get_instance() is s2.get_instance()
 
+
 class MonostateSingleton(object):
     __shared_state = {'1': 2}
 
@@ -55,3 +57,20 @@ a1.x = 5
 assert not a1 is a2
 assert a1.x == a2.x
 assert a1.__dict__ == a2.__dict__
+
+
+class MetaclassSingleton(type):
+    _instances = {}
+    def __call__(cls, *args, **kwargs):
+        if cls not in cls._instances:
+            cls._instances[cls] = super(MetaclassSingleton, cls).__call__(*args, **kwargs)
+
+        return cls._instances[cls]
+
+class TestSingleton(metaclass=MetaclassSingleton):
+    pass
+
+s1 = TestSingleton()
+s2 = TestSingleton()
+
+assert s1 is s2
